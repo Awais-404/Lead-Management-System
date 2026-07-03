@@ -6,6 +6,7 @@ import { Link } from "react-router-dom"
 import AddLeadForm from "./AddLeadForm"
 import { useLeadsContext } from "../context/leadsContext"
 import { useAuthContext } from "../context/authContext"
+import { getApiUrl } from "../api"
 
 function Home(){
     // const [leads, setleads] = useState([])
@@ -16,7 +17,7 @@ function Home(){
         if (!user) return
 
         const getLeads = async ()=>{
-            const response = await fetch('http://localhost:4000/api/leads', {
+            const response = await fetch(getApiUrl('/leads'), {
                 headers: {'Authorization': `Bearer ${user.token}`}
             })
             const json = await response.json()

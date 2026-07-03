@@ -1,13 +1,14 @@
 require('dotenv').config()
 
 const express = require('express')
+const path = require('path')
 const cors = require('cors')
 const mongoose = require('mongoose')
 const leadRoutes = require('./routes/leads.js')
 const userRoutes = require('./routes/users.js')
 
 const app = express()
-const port = 4000
+const port = process.env.PORT || 4000
 
 
 // Middleware
@@ -20,8 +21,8 @@ app.use((req, res, next) => {
 
 
 // Routes
-app.get('/',(req, res)=>{
-    res.json({msg:"Hello from the server"})
+app.get('/', (req, res) => {
+  res.json({ msg: 'Hello from the server' })
 })
 app.use('/api/leads', leadRoutes)
 app.use('/api/user', userRoutes)

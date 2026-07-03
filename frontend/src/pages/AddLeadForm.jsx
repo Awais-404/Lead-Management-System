@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useAuthContext } from "../context/authContext"
+import { getApiUrl } from "../api"
 
 function AddLeadForm(){
     const [name, setName] = useState("")
@@ -19,7 +20,7 @@ function AddLeadForm(){
 
         const lead = {name, email, phone, status, assignedTo}
 
-        const response = await fetch('http://localhost:4000/api/leads',{
+        const response = await fetch(getApiUrl('/leads'),{
             method:'POST',
             body:JSON.stringify(lead),
             headers:{

@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useLeadsContext } from "../context/leadsContext"
 import { useAuthContext } from "../context/authContext"
+import { getApiUrl } from "../api"
 
 function LeadCard({lead}){
     const [Status, setStatus] = useState(lead.status)
@@ -12,7 +13,7 @@ function LeadCard({lead}){
 
         setStatus(e.target.value)
         const newlead = {...lead, status:e.target.value}
-        const response = await fetch('http://localhost:4000/api/leads/'+lead._id,{
+        const response = await fetch(getApiUrl(`/leads/${lead._id}`),{
             method:'PUT',
             body: JSON.stringify(newlead),
             headers:{
@@ -26,7 +27,7 @@ function LeadCard({lead}){
     const handleDelete = async ()=>{
         if (!user) return
 
-        const response = await fetch('http://localhost:4000/api/leads/'+lead._id,{
+        const response = await fetch(getApiUrl(`/leads/${lead._id}`),{
             method:'DELETE',
             headers:{
                 'Authorization': `Bearer ${user.token}`

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { PieChart, Pie, Cell, Legend, Tooltip, ResponsiveContainer } from "recharts"
 import { useAuthContext } from "../context/authContext"
+import { getApiUrl } from "../api"
 
 function Dashboard(){
     const [info, setInfo] = useState({})
@@ -11,7 +12,7 @@ function Dashboard(){
         if (!user) return
 
         const getInfo = async ()=>{
-            const response = await fetch('http://localhost:4000/api/leads/info', {
+            const response = await fetch(getApiUrl('/leads/info'), {
                 headers: {'Authorization': `Bearer ${user.token}`}
             })
             const json = await response.json()
