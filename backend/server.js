@@ -1,7 +1,10 @@
-require('dotenv').config()
+const path = require('path')
+const dotenv = require('dotenv')
+
+dotenv.config({ path: path.resolve(__dirname, '.env') })
+dotenv.config({ path: path.resolve(__dirname, '.env.example') })
 
 const express = require('express')
-const path = require('path')
 const cors = require('cors')
 const mongoose = require('mongoose')
 const leadRoutes = require('./routes/leads.js')
@@ -21,9 +24,6 @@ app.use((req, res, next) => {
 
 
 // Routes
-app.get('/', (req, res) => {
-  res.json({ msg: 'Hello from the server' })
-})
 app.use('/api/leads', leadRoutes)
 app.use('/api/user', userRoutes)
 
